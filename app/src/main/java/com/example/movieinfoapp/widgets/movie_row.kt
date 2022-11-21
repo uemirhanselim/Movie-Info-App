@@ -35,7 +35,9 @@ fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) 
     Card(modifier = Modifier
         .padding(16.dp)
         .fillMaxWidth()
-        .clickable { },
+        .clickable {
+                   onItemClick(movie.title)
+        },
         shape = RoundedCornerShape(corner = CornerSize(12.dp),),
         elevation = 6.dp,
         backgroundColor = Color.LightGray
@@ -62,7 +64,7 @@ fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) 
                         withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold)) {
                             append("Released Year: ")
                         }
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Light)) {
+                        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal)) {
                             append(movie.released)
                         }
                     })
@@ -70,7 +72,7 @@ fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) 
                         withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold)) {
                             append("Genres: ")
                         }
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Light)) {
+                        withStyle(style = SpanStyle(fontWeight = FontWeight.Normal)) {
                             append(movie.genre)
                         }
                     })
@@ -81,7 +83,7 @@ fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) 
                     withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold)) {
                         append("Plot: ")
                     }
-                    withStyle(style = SpanStyle(fontWeight = FontWeight.Light)) {
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Normal)) {
                         append(movie.plot)
                     }
                 })
