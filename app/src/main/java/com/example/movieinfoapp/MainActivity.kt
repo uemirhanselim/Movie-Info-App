@@ -18,11 +18,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
 import com.example.movieinfoapp.model.Movie
 import com.example.movieinfoapp.model.getMovies
 import com.example.movieinfoapp.ui.theme.MovieInfoAppTheme
@@ -78,8 +83,18 @@ fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) 
     ) {
         Column() {
             Row(modifier = Modifier.padding(8.dp)) {
-                Icon(imageVector = Icons.Default.Home, contentDescription = "icon", modifier =
-                Modifier.size(40.dp))
+                Surface(
+                    modifier =Modifier.padding(12.dp)
+                        .size(100.dp), shape = RectangleShape,
+                    elevation =4.dp
+                ) {
+                    AsyncImage(model = ImageRequest.Builder(LocalContext.current).data(movie.poster)
+                        .transformations(CircleCropTransformation())
+                        .crossfade(true)
+                        .build(),
+
+                        contentDescription = "Poster")
+                }
                 Spacer(modifier = Modifier.width(5.dp))
                 Column(verticalArrangement = Arrangement.Center) {
                     Text(text = movie.title)
@@ -90,7 +105,9 @@ fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) 
 
             Icon(imageVector = if (isExpanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
                 contentDescription = "Arrow Down",
-            modifier = Modifier.align(Alignment.CenterHorizontally).clickable {  }
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .clickable { }
                 , tint = Color.DarkGray)
         }
     }
