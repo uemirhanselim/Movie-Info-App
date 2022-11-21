@@ -62,4 +62,9 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
     // Coil library for Network Images
     implementation("io.coil-kt:coil-compose:2.2.2")
+    // Pager Library
+    implementation "com.google.accompanist:accompanist-pager:0.23.1"
+    // Navigation Library
+    def nav_version = "2.5.2"
+    implementation "androidx.navigation:navigation-compose:$nav_version"
 }
